@@ -82,3 +82,7 @@ input[type="submit"]{
     width: 70px;
     cursor: pointer;
 }
+#mainLink{
+    text-decoration: none;
+    font-size: 26px;
+}
