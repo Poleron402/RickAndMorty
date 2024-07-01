@@ -77,10 +77,17 @@ input[type="text"]{
 }
 input[type="submit"]{
     margin-right: 20px;
-    border: none;
+    border: 2px solid rgb(187, 222, 79);
     padding: 10px;
     width: 70px;
     cursor: pointer;
+    border-radius: 10px;
+    background: none;
+    color:rgb(187, 222, 79)
+}
+input[type="submit"]:hover{
+    color:rgb(82, 178, 201);
+    border: 2px solid rgb(82, 178, 201);
 }
 #mainLink{
     text-decoration: none;

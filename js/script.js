@@ -1,12 +1,18 @@
 let pageCount = 0
 let objectCounter = 0
-const APICall = async()=>{
-    pageCount++;
+
+const renderCharacters = (dataObj)=>{
+    console.log(pageCount)
+    let pageComparison = dataObj.info.pages
+    if (pageCount == pageComparison){
+        document.getElementById('more').disabled=true;
+        document.getElementById('more').style.visibility = 'hidden'
+    }else{
+        document.getElementById('more').disabled=false;
+        document.getElementById('more').style.visibility = 'visible'    
+    }
+    let data = dataObj.results
     let divBody = document.getElementById("mainDiv")
-    let request = await fetch(`https://rickandmortyapi.com/api/character/?page=${pageCount}`)
-    let data = await request.json()
-    data = data.results
-    console.log(data)
     for (let i=0; i<data.length; i++){
         objectCounter += 1
         divBody.innerHTML += `<div class="characterCard" id="card${objectCounter}">
@@ -26,19 +32,45 @@ const APICall = async()=>{
     }
     
 }
-APICall()
-const APICallByCharacter = async(e) =>{
-    
-    let charName = document.getElementById('charName').value
-    let response = await fetch(`https://rickandmortyapi.com/api/character/?page=2&name=${charName}`)
-    let data = await response.json()
-    if(data.results){
-        console.log(data.results)
-    }else{
-        e.preventDefault()
+const APICall = async()=>{
+    pageCount++;
+    let request = await fetch(`https://rickandmortyapi.com/api/character/?page=${pageCount}`)
+    let data = await request.json()
+    // console.log(data)
+    if (data.results){
+        renderCharacters(data)
     }
 }
-document.getElementById('btn').addEventListener('click', APICall)
+APICall()
+const APICallByCharacter = async(charName)=>{
+    pageCount++
+    if(charName == ''){
+        APICall()
+    }
+    let response = await fetch(`https://rickandmortyapi.com/api/character/?page=${pageCount}&name=${charName}`)
+    let data = await response.json()
+    if(data.results){
+        renderCharacters(data)
+    }else{
+        alert('There is no such character:(')
+    }
+}
+const APICallByCharacterEventHandler = (e) =>{
+    pageCount = 0
+    e.preventDefault()
+    document.getElementById("mainDiv").innerHTML = ""
+    let charName = document.getElementById('charName').value
+    charName == ""? APICall():APICallByCharacter(charName)
+}
+const APICallHandler = () =>{
+    console.log(document.getElementById('charName').value)
+    if (!document.getElementById('charName').value){
+        APICall()
+    }else{
+        APICallByCharacter()
+    }
+}
+document.getElementById('more').addEventListener('click', APICallHandler)
 document.getElementById('submit').addEventListener('click', (event)=>{
-    APICallByCharacter(event)
+    APICallByCharacterEventHandler(event)
 })
