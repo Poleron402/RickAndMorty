@@ -1,0 +1,84 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgb(32, 33, 47);
+    color: rgb(187, 222, 79);
+}
+.nav{
+    display: flex;
+}
+#links{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+#title{
+   width: 400px;
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+}
+a{
+    margin-inline: 20px;
+}
+#mainDiv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+}
+.characterCard{
+    /* border: 2px solid black; */
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+    color:rgb(82, 178, 201);
+    transition: transform 0.3s cubic-bezier(.34,.59,.69,.92);
+    cursor: pointer;
+}
+.characterCard:hover{
+    transform: scale(1.1);
+}
+#btn{
+    display: flex;
+    justify-content: center;
+}
+button{
+    padding: 13px;
+    margin: 20px;
+    font-size: 25px;
+    background-color:rgb(82, 178, 201);
+    color: rgb(187, 222, 79);
+    border: none;
+    text-shadow: 1px 1px rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 10px;
+}
+button:hover{
+    background-color: rgb(187, 222, 79);
+    color:rgb(82, 178, 201);
+}
+a{
+    color:rgb(187, 222, 79);
+    font-size: 20px;
+}
+input[type="text"]{
+    margin-right: 20px;
+    padding: 10px;
+    width: 17em;
+    border: 4px solid rgb(187, 222, 79);
+    border-radius: 10px;
+}
+input[type="submit"]{
+    margin-right: 20px;
+    border: none;
+    padding: 10px;
+    width: 70px;
+    cursor: pointer;
+}
