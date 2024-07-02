@@ -66,10 +66,7 @@ APICall()
 //different call for specific character
 const APICallByCharacter = async(charName)=>{
     pageCount++
-    //form validation, if we simply press search, all characters will load
-    if(charName == ''){
-        APICall()
-    }
+
     let response = await fetch(`https://rickandmortyapi.com/api/character/?page=${pageCount}&name=${charName}`)
     let data = await response.json()
     if(data.results){
@@ -78,18 +75,22 @@ const APICallByCharacter = async(charName)=>{
         alert('There is no such character:(')
     }
 }
+//The two methods below basically do the same thing but one needs an event argument and the other does not
+//in addition, one should reset page count, the other should preserve it
 //we dont want the form to submit immediately, so we need to disable event's default behavior
 const APICallByCharacterEventHandler = (e) =>{
     pageCount = 0
     e.preventDefault()
     document.getElementById("mainDiv").innerHTML = ""
     let charName = document.getElementById('charName').value
+    //form validation
     charName == ""? APICall():APICallByCharacter(charName)
 }
 //I had to add a handler since I was having trouble loading only the character that a user searches for. If there is 'stuff' in the text
 //input, then we just keep calling that stuff's endpoint
 const APICallHandler = () =>{
     let charName = document.getElementById('charName').value
+    //form validation, if we simply press search, all characters will load
     if (!document.getElementById('charName').value){
         APICall()
     }else{
